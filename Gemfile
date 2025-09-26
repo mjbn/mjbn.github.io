@@ -4,8 +4,6 @@ source "https://rubygems.org"
 
 gem "github-pages", "~> 232", group: :jekyll_plugins
 
-gemspec
-
 gem "html-proofer", "~> 5.0", group: :test
 
 platforms :mingw, :x64_mingw, :mswin, :jruby do
