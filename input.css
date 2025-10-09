@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+    :root {
+      --bg-dark: #1a1b26;
+      --bg-light: #f5f5f5;
+      --accent-blue: #7aa2f7;
+      --accent-purple: #bb9af7;
+      --accent-pink: #f7768e;
+      --accent-green: #9ece6a;
+      --text-dark: #c0caf5;
+    }

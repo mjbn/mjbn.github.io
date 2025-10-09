@@ -59,3 +59,6 @@ exclude:
    - vendor/ruby/
    - LICENSE
    - README.md
+   - main.css
+   - tailwind.config.js
+   - store.html.old

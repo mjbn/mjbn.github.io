@@ -13,14 +13,14 @@
         <a href="/novel/" class="hover:text-[var(--accent-pink)]">Novels</a>
         <a href="/about/" class="hover:text-[var(--accent-pink)]">About</a>
         <!-- Cart Button -->
-        <button @click="cartOpen = !cartOpen" class="relative px-3 py-1 bg-[var(--accent-blue)] text-white rounded-lg ml-4">
+        <button x-show="showcart" @click="$store.cart.open = !$store.cart.open" class="relative px-3 py-1 bg-[var(--accent-blue)] text-white rounded-lg ml-4">
           🛒 Cart
-          <span x-text="cart.length" class="absolute -top-2 -right-2 bg-[var(--accent-pink)] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span>
+          <span x-text="$store.cart.cart.length" class="absolute -top-2 -right-2 bg-[var(--accent-pink)] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span>
         </button>
         <!-- Dark Mode Toggle -->
         <button @click="darkMode = !darkMode" class="px-3 py-1 bg-[var(--accent-purple)] text-white rounded-lg ml-2">
-          <span x-show="!darkMode">🌙 Dark</span>
-          <span x-show="darkMode">☀️ Light</span>
+          <span x-show="darkMode">🌙 Dark</span>
+          <span x-show="!darkMode">☀️ Light</span>
         </button>
       </div>
     </div>

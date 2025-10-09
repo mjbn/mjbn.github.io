@@ -3,25 +3,59 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
-  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
 	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
     {%- include google-analytics.html -%}
   {% else %}
     <script defer src="{{ "/assets/alpinejs.min.js" | relative_url }}"></script>
-	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- endif -%}
-  <style>
-    :root {
-      --bg-dark: #1a1b26;
-      --bg-light: #f5f5f5;
-      --accent-blue: #7aa2f7;
-      --accent-purple: #bb9af7;
-      --accent-pink: #f7768e;
-      --accent-green: #9ece6a;
-      --text-dark: #c0caf5;
-    }
-  </style>
+
+  <!-- Alpine.js Store Logic -->
+  <script>
+document.addEventListener('alpine:init', () => {
+    Alpine.store('cart', {
+        darkMode: true,
+        open: false,
+        products: [
+          {id: 1, name: 'Neon Hoodie', description: 'Soft cotton hoodie inspired by Shibuya nights.', price: 49.99, image: 'https://via.placeholder.com/300x200', quantity: 1},
+          {id: 2, name: 'Tokyo Mug', description: 'Enjoy your coffee in neon style.', price: 14.99, image: 'https://via.placeholder.com/300x200', quantity: 1},
+          {id: 3, name: 'City Lights Poster', description: 'Bring Tokyo’s glow to your room.', price: 19.99, image: 'https://via.placeholder.com/300x200', quantity: 1}
+        ],
+        cart: [],
+	name: '',
+        email: '',
+        address: '',
+        payment: '',
+        loadCart() {
+          let stored = localStorage.getItem('cart');
+          if(stored) this.cart = JSON.parse(stored);
+        },
+        saveCart() {
+          localStorage.setItem('cart', JSON.stringify(this.cart));
+        },
+        addToCart(product) {
+          let item = this.cart.find(i => i.id === product.id);
+          if(item) item.quantity++;
+          else this.cart.push({...product});
+          this.saveCart();
+        },
+        removeFromCart(index) {
+          this.cart.splice(index, 1);
+          this.saveCart();
+        },
+        updateQuantity(index, delta) {
+          let item = this.cart[index];
+          item.quantity += delta;
+          if(item.quantity < 1) this.cart.splice(index, 1);
+          this.saveCart();
+        },
+        cartTotal() {
+          return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        }
+      })
+})
+  </script>
 </head>

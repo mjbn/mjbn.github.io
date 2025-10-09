@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}" x-data="{ darkMode: true }" x-bind:class="darkMode ? 'dark' : ''">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" x-data="{ darkMode: true, showcart: false }" x-bind:class="darkMode ? 'dark' : ''" x-init="$store.cart.loadCart()">
 
   {%- include head.html -%}
 
