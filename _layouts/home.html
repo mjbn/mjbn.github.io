@@ -1,34 +1,27 @@
 ---
 layout: default
 ---
+  <!-- Hero Section -->
+  <header class="flex-1 text-center py-20 bg-[var(--accent-blue)]/10 dark:bg-[var(--accent-blue)]/20">
+    <h1 class="text-4xl font-bold mb-4">Welcome to TokyoNight</h1>
+    <p class="text-lg text-[var(--accent-purple)]">A place for stories, style, and creativity</p>
+  </header>
 
-<div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
-
-  {{ content }}
-
-  {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
-    <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li>
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-
-    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
-  {%- endif -%}
-
-</div>
+  <!-- Highlights -->
+  <section class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
+    <div class="p-6 rounded-xl bg-white dark:bg-[#24283b] shadow hover:shadow-lg transition">
+      <h2 class="text-2xl font-semibold mb-2 text-[var(--accent-blue)]">🛍️ Store</h2>
+      <p>Discover products inspired by the Tokyo Night aesthetic.</p>
+      <a href="store.html" class="text-[var(--accent-pink)] mt-3 inline-block">Explore →</a>
+    </div>
+    <div class="p-6 rounded-xl bg-white dark:bg-[#24283b] shadow hover:shadow-lg transition">
+      <h2 class="text-2xl font-semibold mb-2 text-[var(--accent-blue)]">📰 Blog</h2>
+      <p>Read updates, thoughts, and creative insights from the author.</p>
+      <a href="blog.html" class="text-[var(--accent-pink)] mt-3 inline-block">Read More →</a>
+    </div>
+    <div class="p-6 rounded-xl bg-white dark:bg-[#24283b] shadow hover:shadow-lg transition">
+      <h2 class="text-2xl font-semibold mb-2 text-[var(--accent-blue)]">📖 Novels</h2>
+      <p>Dive into original stories and serialized novels.</p>
+      <a href="novels.html" class="text-[var(--accent-pink)] mt-3 inline-block">Read Now →</a>
+    </div>
+  </section>

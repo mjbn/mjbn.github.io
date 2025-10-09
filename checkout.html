@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" x-data="checkoutApp()" x-init="loadCart()" x-bind:class="darkMode ? 'dark' : ''">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | TokyoNight</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <style>
+    :root {
+      --bg-dark: #1a1b26;
+      --bg-light: #f5f5f5;
+      --accent-blue: #7aa2f7;
+      --accent-purple: #bb9af7;
+      --accent-pink: #f7768e;
+      --accent-green: #9ece6a;
+      --text-dark: #c0caf5;
+    }
+  </style>
+</head>
+<body class="bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-gray-800 dark:text-[var(--text-dark)] min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-white dark:bg-[#1f2335] shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-[var(--accent-blue)]">TokyoNight</a>
+      <div class="space-x-4 hidden md:flex items-center">
+        <a href="store.html" class="hover:text-[var(--accent-pink)]">Store</a>
+        <a href="blog.html" class="hover:text-[var(--accent-pink)]">Blog</a>
+        <a href="novels.html" class="hover:text-[var(--accent-pink)]">Novels</a>
+        <a href="about.html" class="hover:text-[var(--accent-pink)]">About</a>
+        <button @click="darkMode = !darkMode" class="px-3 py-1 bg-[var(--accent-purple)] text-white rounded-lg ml-2">
+          <span x-show="!darkMode">🌙 Dark</span>
+          <span x-show="darkMode">☀️ Light</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Checkout Section -->
+  <section class="max-w-3xl mx-auto px-6 py-12 space-y-8">
+    <h1 class="text-3xl font-bold mb-4 text-[var(--accent-blue)]">🧾 Checkout</h1>
+
+    <template x-if="cart.length === 0">
+      <p class="text-gray-500">Your cart is empty. <a href="store.html" class="text-[var(--accent-pink)]">Go shopping →</a></p>
+    </template>
+
+    <template x-if="cart.length > 0">
+      <div class="bg-white dark:bg-[#24283b] p-6 rounded-xl shadow space-y-6">
+        <h2 class="text-xl font-semibold mb-2 text-[var(--accent-purple)]">Order Summary</h2>
+        <ul class="divide-y divide-gray-300 dark:divide-gray-600 mb-4">
+          <template x-for="item in cart" :key="item.id">
+            <li class="flex justify-between py-2">
+              <span x-text="item.name + ' x' + item.quantity"></span>
+              <span x-text="'$'+(item.price*item.quantity).toFixed(2)"></span>
+            </li>
+          </template>
+        </ul>
+        <p class="font-bold text-lg text-right">Total: $<span x-text="cartTotal().toFixed(2)"></span></p>
+
+        <h2 class="text-xl font-semibold mb-2 text-[var(--accent-purple)]">Shipping & Payment</h2>
+        <form @submit.prevent="placeOrder" class="space-y-4">
+          <input type="text" placeholder="Full Name" x-model="name" required class="w-full p-2 rounded bg-[#1a1b26] border border-[#3b4261]">
+          <input type="email" placeholder="Email Address" x-model="email" required class="w-full p-2 rounded bg-[#1a1b26] border border-[#3b4261]">
+          <input type="text" placeholder="Address" x-model="address" required class="w-full p-2 rounded bg-[#1a1b26] border border-[#3b4261]">
+          <select x-model="payment" required class="w-full p-2 rounded bg-[#1a1b26] border border-[#3b4261]">
+            <option value="">Select Payment Method</option>
+            <option>Credit Card</option>
+            <option>PayPal</option>
+            <option>Cash on Delivery</option>
+          </select>
+          <button type="submit" class="bg-[var(--accent-pink)] text-white px-4 py-2 rounded-lg w-full">Place Order</button>
+        </form>
+      </div>
+    </template>
+  </section>
+
+  <footer class="bg-white dark:bg-[#1f2335] text-center py-4 mt-auto">
+    <p>&copy; 2025 TokyoNight. All rights reserved.</p>
+  </footer>
+
+  <!-- Alpine.js Checkout Logic -->
+  <script>
+    function checkoutApp() {
+      return {
+        darkMode: true,
+        cart: [],
+        name: '',
+        email: '',
+        address: '',
+        payment: '',
+        loadCart() {
+          let stored = localStorage.getItem('cart');
+          if(stored) this.cart = JSON.parse(stored);
+        },
+        cartTotal() {
+          return this.cart.reduce((sum,item) => sum + item.price*item.quantity,0);
+        },
+        placeOrder() {
+          if(!this.name || !this.email || !this.address || !this.payment) {
+            alert("Please fill out all fields");
+            return;
+          }
+          // Clear cart
+          this.cart = [];
+          localStorage.removeItem('cart');
+          // Redirect to thank you page
+          window.location.href = "thankyou.html";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+

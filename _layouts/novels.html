@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<section class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-8">
+
+    {%- if site.posts.size > 0 -%}
+    {%- for post in site.posts -%}
+	{%- if post.layout == novel -%}
+    <div class="bg-[#24283b] p-6 rounded-xl shadow">
+      <h2 class="text-2xl font-semibold text-[#7aa2f7] mb-2">{{ post.title | escape }}</h2>
+      <p class="text-sm text-gray-400 mb-3">Genre: Mystery Thriller</p>
+      {%- if site.show_excerpts -%}
+          <p>{{ post.excerpt }}</p>
+        {%- endif -%}
+      <a href="{{ post.url | relative_url }}" class="text-[#f7768e] mt-3 inline-block">Read Chapter 1 →</a>
+    </div>
+
+    <article class="bg-[#24283b] p-6 rounded-xl shadow">
+      <h2 class="text-2xl font-semibold text-[#7aa2f7] mb-2">{{ post.title | escape }}</h2>
+	{%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+      <p class="text-sm text-gray-400 mb-3">{{ post.date | date: date_format }} · by MJBN</p>
+	{%- if site.show_excerpts -%}
+          <p>{{ post.excerpt }}</p>
+        {%- endif -%}
+      <a href="{{ post.url | relative_url }}" class="text-[#f7768e] mt-3 inline-block">Read More →</a>
+    </article>
+	{%- endif -%}
+    {%- endfor -%}
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+    {%- endif -%}
+
+</section>

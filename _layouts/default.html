@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" x-data="{ darkMode: true }" x-bind:class="darkMode ? 'dark' : ''">
 
   {%- include head.html -%}
 
-  <body>
+  <body class="bg-[var(--bg-light)] dark:bg-[var(--bg-dark)] text-gray-800 dark:text-[var(--text-dark)] min-h-screen flex flex-col">
 
     {%- include header.html -%}
 
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
         {{ content }}
-      </div>
-    </main>
 
     {%- include footer.html -%}
 

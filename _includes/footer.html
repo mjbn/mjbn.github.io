@@ -1,37 +1,45 @@
-<div class="container">
-<footer
-        class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
-      >
-
-        <div class="col-md-4 d-flex align-items-center">
-          <a
-            href="/"
-            class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
-            aria-label="Bootstrap"
-          >
-            <svg class="bi" width="30" height="24" aria-hidden="true">
-              <use xlink:href="#bootstrap"></use>
-            </svg>
-          </a>
-          <span class="mb-3 mb-md-0 text-body-secondary"
-            >&copy; 2025 {{ site.title | escape }}
-		{%- if site.author -%}
-			, {{ site.author | escape }}</span>
-		{%- endif -%}
-        </div>
-
-		{%- include social.html -%}
-
-<!--
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3">
-            <a class="text-body-secondary" href="#" aria-label="Instagram">
-		<svg class="bi" width="24" height="24" aria-hidden="true">
-                	<use xlink:href="#instagram"></use></svg>
-		</a>
-          </li>
-        </ul>
--->
-      </footer>
-</div>
-
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-[#1f2335] text-center py-4 mt-auto">
+    <p>&copy; 2025 TokyoNight. Crafted with 💙 in the Tokyo Night style.</p>
+  </footer>
+  <!-- Alpine.js Store Logic -->
+  <script>
+    function storeApp() {
+      return {
+        darkMode: true,
+        cartOpen: false,
+        products: [
+          {id: 1, name: 'Neon Hoodie', description: 'Soft cotton hoodie inspired by Shibuya nights.', price: 49.99, image: 'https://via.placeholder.com/300x200', quantity: 1},
+          {id: 2, name: 'Tokyo Mug', description: 'Enjoy your coffee in neon style.', price: 14.99, image: 'https://via.placeholder.com/300x200', quantity: 1},
+          {id: 3, name: 'City Lights Poster', description: 'Bring Tokyo’s glow to your room.', price: 19.99, image: 'https://via.placeholder.com/300x200', quantity: 1}
+        ],
+        cart: [],
+        loadCart() {
+          let stored = localStorage.getItem('cart');
+          if(stored) this.cart = JSON.parse(stored);
+        },
+        saveCart() {
+          localStorage.setItem('cart', JSON.stringify(this.cart));
+        },
+        addToCart(product) {
+          let item = this.cart.find(i => i.id === product.id);
+          if(item) item.quantity++;
+          else this.cart.push({...product});
+          this.saveCart();
+        },
+        removeFromCart(index) {
+          this.cart.splice(index, 1);
+          this.saveCart();
+        },
+        updateQuantity(index, delta) {
+          let item = this.cart[index];
+          item.quantity += delta;
+          if(item.quantity < 1) this.cart.splice(index, 1);
+          this.saveCart();
+        },
+        cartTotal() {
+          return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        }
+      }
+    }
+  </script>

@@ -2,58 +2,27 @@
 {%- assign default_paths = site.pages | map: "path" -%}
 {%- assign page_paths = site.header_pages | default: default_paths -%}
 
-
-<nav class="site-nav">
-
-</nav>
-<header class="p-3 text-bg-dark">
-	<div class="container">
-		<div
-			class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-		>
-			<a
-				href="{{ "/" | relative_url }}" rel="author"
-				class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none site-title"
-			>
-				<svg
-					class="bi me-2"
-					width="40"
-					height="32"
-					role="img"
-					aria-label="Bootstrap"
-				>
-					<use xlink:href="#bootstrap"></use>
-				</svg>
-				{{ site.title | escape }}
-			</a>
-			<ul
-				class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-			>
-				{%- if page_paths -%}
-				<li><a href="{{ "/" | relative_url }}" class="nav-link px-2 text-white">Home</a></li>
-				{%- for path in page_paths -%}
-				{%- assign my_page = site.pages | where: "path", path | first -%}
-				{%- if my_page.title -%}
-				<li><a href="{{ my_page.url | relative_url }}" class="nav-link px-2 text-secondary">{{ my_page.title | escape }}</a></li>
-				{%- endif -%}
-				{%- endfor -%}
-				{%- endif -%}
-
-			</ul>
-			<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-				<input
-					type="search"
-					class="form-control form-control-dark text-bg-dark"
-					placeholder="Search..."
-					aria-label="Search"
-				/>
-			</form>
-			<div class="text-end">
-				<button type="button" class="btn btn-outline-light me-2">
-					Login
-				</button>
-				<button type="button" class="btn btn-warning">Sign-up</button>
-			</div>
-		</div>
-	</div>
+<header class="">
+  <!-- Navbar -->
+  <nav class="bg-white dark:bg-[#1f2335] shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="/" class="text-xl font-bold text-[var(--accent-blue)]">TokyoNight</a>
+      <div class="space-x-4 hidden md:flex items-center">
+        <a href="/store/" class="hover:text-[var(--accent-pink)]">Store</a>
+        <a href="/blog/" class="hover:text-[var(--accent-pink)]">Blog</a>
+        <a href="/novel/" class="hover:text-[var(--accent-pink)]">Novels</a>
+        <a href="/about/" class="hover:text-[var(--accent-pink)]">About</a>
+        <!-- Cart Button -->
+        <button @click="cartOpen = !cartOpen" class="relative px-3 py-1 bg-[var(--accent-blue)] text-white rounded-lg ml-4">
+          🛒 Cart
+          <span x-text="cart.length" class="absolute -top-2 -right-2 bg-[var(--accent-pink)] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"></span>
+        </button>
+        <!-- Dark Mode Toggle -->
+        <button @click="darkMode = !darkMode" class="px-3 py-1 bg-[var(--accent-purple)] text-white rounded-lg ml-2">
+          <span x-show="!darkMode">🌙 Dark</span>
+          <span x-show="darkMode">☀️ Light</span>
+        </button>
+      </div>
+    </div>
+  </nav>
 </header>
