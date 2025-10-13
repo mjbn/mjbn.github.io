@@ -1,0 +1,38 @@
+---
+layout: default
+title: Sign Up
+permalink: /signup/
+---
+
+  <!-- Signup Form -->
+  <section class="flex-1 flex items-center justify-center py-12">
+    <div class="bg-white dark:bg-[#24283b] rounded-xl p-8 shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-6 text-[var(--accent-blue)] text-center">📝 Sign Up</h1>
+
+      <form @submit.prevent="signup" x-data="signup">
+        <input type="text" x-model="username" placeholder="Username" class="w-full p-3 mb-4 rounded bg-gray-100 dark:bg-[#1a1b26]" required>
+        <input type="email" x-model="email" placeholder="Email" class="w-full p-3 mb-4 rounded bg-gray-100 dark:bg-[#1a1b26]" required>
+        <input type="password" x-model="password" placeholder="Password" class="w-full p-3 mb-4 rounded bg-gray-100 dark:bg-[#1a1b26]" required>
+        <button type="submit" class="w-full bg-[var(--accent-pink)] text-white py-2 rounded-lg hover:bg-[var(--accent-purple)]">Create Account</button>
+      </form>
+
+      <p class="text-center text-sm mt-4">Already have an account? <a href="/login/" class="text-[var(--accent-pink)]">Login</a></p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('signup', () => ({
+            username: '',
+	    email: '',
+ 	    password: '',
+            signup() {
+          localStorage.setItem('username', this.username);
+          alert('Account created! Welcome, ' + this.username);
+          window.location.href = '/';
+        },
+        }))
+    })
+  </script>
+</body>
+</html>

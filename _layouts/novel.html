@@ -1,0 +1,19 @@
+---
+layout: default
+---
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold text-[var(--accent-blue)] mb-2">{{ page.title | escape }}</h1>
+	{%- if page.author -%}
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">by {{ page.author }}</p>
+	{%- endif -%}
+    <p class="mb-8">{{ post.excerpt }}</p>
+
+    <h2 class="text-2xl font-semibold text-[var(--accent-pink)] mb-4">Chapters</h2>
+    <ul class="space-y-2">
+      <template x-for="ch in novel.chapters" :key="ch.id">
+        <li>
+          <a :href="'chapter.html?novel=' + novel.id + '&ch=' + ch.id" class="block px-4 py-2 bg-white dark:bg-[#24283b] rounded hover:bg-[var(--accent-blue)]/10" x-text="ch.title"></a>
+        </li>
+      </template>
+    </ul>
+  </section>
