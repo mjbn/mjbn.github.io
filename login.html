@@ -9,7 +9,7 @@ permalink: /login/
     <div class="bg-white dark:bg-[#24283b] rounded-xl p-8 shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold mb-6 text-[var(--accent-blue)] text-center">🔐 Login</h1>
 
-      <form @submit.prevent="log1" x-data="login">
+      <form @submit.prevent="login" x-data="login">
         <input type="text" x-model="username" placeholder="Username" class="w-full p-3 mb-4 rounded bg-gray-100 dark:bg-[#1a1b26]" required>
         <input type="password" x-model="password" placeholder="Password" class="w-full p-3 mb-4 rounded bg-gray-100 dark:bg-[#1a1b26]" required>
         <button type="submit" class="w-full bg-[var(--accent-pink)] text-white py-2 rounded-lg hover:bg-[var(--accent-purple)]">Login</button>
@@ -29,11 +29,6 @@ permalink: /login/
           alert('Welcome, ' + this.username + '!');
           window.location.href = '/';
         },
-	log1(){
-const response = await fetch('/.functions/hello-world')
-		.then(response => response.json());
-print(response);
-},
         }))
     })
   </script>
