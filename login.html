@@ -30,7 +30,7 @@ permalink: /login/
           window.location.href = '/';
         },
 	log1(){
-const response = await fetch('/.netlify/functions/hello-world')
+const response = await fetch('/.functions/hello-world')
 		.then(response => response.json());
 print(response);
 },
