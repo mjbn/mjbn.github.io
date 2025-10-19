@@ -1,1 +1,8 @@
-<h1>hello</h1>
+export const handler = async () => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Hello World!',
+    }),
+  }
+}
