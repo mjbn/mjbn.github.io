@@ -6,7 +6,7 @@
   <!-- Navbar -->
   <nav class="bg-white dark:bg-[#1f2335] shadow-md sticky top-0 z-50" x-data="{menuOpen:false}">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="/" class="text-xl font-bold text-[var(--accent-blue)]">TokyoNight</a>
+      <a href="/" class="text-xl font-bold text-[var(--accent-blue)]">MJBN</a>
       <div class="hidden md:flex space-x-4 items-center">
         <a href="/store/" class="hover:text-[var(--accent-pink)]">Store</a>
         <a href="/blog/" class="hover:text-[var(--accent-pink)]">Blog</a>
@@ -32,11 +32,11 @@
     </div>
 
     <div x-show="menuOpen" x-transition class="bg-[#1f2335] text-[var(--text-dark)] md:hidden sm:show">
-      <a href="store.html" class="block px-4 py-2 hover:bg-[#24283b]">Store</a>
-      <a href="blog.html" class="block px-4 py-2 hover:bg-[#24283b]">Blog</a>
-      <a href="novels.html" class="block px-4 py-2 hover:bg-[#24283b]">Novels</a>
-      <a href="about.html" class="block px-4 py-2 hover:bg-[#24283b]">About</a>
-      <a href="cart.html" class="block px-4 py-2 hover:bg-[#24283b]">🛒 Cart</a>
+      <a href="/store/" class="block px-4 py-2 hover:bg-[#24283b]">Store</a>
+      <a href="/blog/" class="block px-4 py-2 hover:bg-[#24283b]">Blog</a>
+      <a href="/novel/" class="block px-4 py-2 hover:bg-[#24283b]">Novels</a>
+      <a href="/about/" class="block px-4 py-2 hover:bg-[#24283b]">About</a>
+      <a href="/store/cart/" class="block px-4 py-2 hover:bg-[#24283b]">🛒 Cart</a>
       <button @click="darkMode = !darkMode" class="block w-full text-left px-4 py-2 bg-[var(--accent-purple)] mt-2">Toggle Dark Mode</button>
     </div>
   </nav>
