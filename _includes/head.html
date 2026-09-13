@@ -57,5 +57,17 @@ document.addEventListener('alpine:init', () => {
         }
       })
 })
+document.addEventListener('alpine:init', () => {
+    Alpine.store('user', {
+	username: localStorage.getItem('username'),
+	href: "/login/",
+	loaduser(){
+		if(this.username != "Login"){
+			localStorage.setItem('username','');
+			this.href =  "/";
+	}else{window.location.href = '/'};
+	},
+    })
+})
   </script>
 </head>

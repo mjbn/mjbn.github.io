@@ -37,37 +37,6 @@ permalink: /store/cart/
       </div>
     </template>
   </section>
-
-
-  <!-- Alpine.js Cart Logic -->
-  <script>
-    function cartApp() {
-      return {
-        darkMode: true,
-        cart: [],
-        loadCart() {
-          let stored = localStorage.getItem('cart');
-          if(stored) this.cart = JSON.parse(stored);
-        },
-        saveCart() {
-          localStorage.setItem('cart', JSON.stringify(this.cart));
-        },
-        removeFromCart(index) {
-          this.cart.splice(index,1);
-          this.saveCart();
-        },
-        updateQuantity(index, delta) {
-          let item = this.cart[index];
-          item.quantity += delta;
-          if(item.quantity < 1) this.cart.splice(index,1);
-          this.saveCart();
-        },
-        cartTotal() {
-          return this.cart.reduce((sum,item) => sum + item.price*item.quantity,0);
-        }
-      }
-    }
-  </script>
 </body>
 </html>
 

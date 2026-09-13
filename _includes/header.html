@@ -24,8 +24,11 @@
           <span x-show="darkMode">🌙 Dark</span>
           <span x-show="!darkMode">☀️ Light</span>
         </button>
-	<a href="/login/" class="px-3 py-1 bg-[var(--accent-purple)] text-white rounded-lg ml-2">
+	<a x-show="!$store.user.username" href="/login/" class="px-3 py-1 bg-[var(--accent-purple)] text-white rounded-lg ml-2">
           <span>Login</span>
+        </a>
+	<a x-show="$store.user.username" href="/user/" class="px-3 py-1 bg-[var(--accent-purple)] text-white rounded-lg ml-2">
+          <span x-text="$store.user.username"></span>
         </a>
       </div>
       <button @click="menuOpen = !menuOpen" class="sm:show md:hidden text-[var(--accent-blue)] text-2xl">☰</button>
